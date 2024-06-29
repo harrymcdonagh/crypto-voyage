@@ -1,29 +1,26 @@
 import { useState } from 'react'
-import {Button, ButtonGroup, Grid, GridItem} from '@chakra-ui/react'
-import './App.css'
+import {Button, Grid, GridItem, List, ListItem, Text} from '@chakra-ui/react'
 import NavBar from './components/NavBar'
+import PriceTable from './components/PriceTable'
+import SidePanel from './components/SidePanel'
 
 function App() {
+
   return (
     <>
       <Grid
         templateAreas={{
-          base: `"nav" "main"`,
-          lg: `"nav nav" "aside main"`,
+          base: `"nav" "main"`
         }}
         templateColumns={{
           base: "1fr",
-          lg: "200px 1fr",
         }}
       >
         <GridItem area = 'nav'>
           <NavBar/>
         </GridItem>
-        <GridItem backgroundColor = 'white' area = 'aside'>
-          Aside
-        </GridItem>
-        <GridItem backgroundColor = 'green' area = 'main'>
-          Main
+        <GridItem area = 'main'>
+          <PriceTable />
         </GridItem>
         </Grid>
     </>
