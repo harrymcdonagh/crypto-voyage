@@ -1,4 +1,3 @@
-import React from 'react';
 import useCoins from '../hooks/useCoins';
 import {
     Table,
@@ -10,10 +9,28 @@ import {
     TableContainer,
     Spinner,
     Text,
+    Icon,
 } from '@chakra-ui/react';
+import { useState } from 'react';
+import { FaStar } from "react-icons/fa6";
+
 
 const PriceTable = () => {
     const { data, error, isLoading } = useCoins();
+    const [watchlisted, setWatchlisted] = useState<Set<string>>(new Set());
+
+    const handleWatchlist = (coinId: string) => {
+        setWatchlisted((prevWtchlistedCoins) => {
+            const newWatchlistedCoins = new Set(prevWtchlistedCoins);
+            if (newWatchlistedCoins.has(coinId)) {
+                newWatchlistedCoins.delete(coinId);
+            }
+            else {
+                newWatchlistedCoins.add(coinId);
+            }
+            return newWatchlistedCoins;
+        })
+    }
 
     if (error) return null;
 
@@ -28,7 +45,8 @@ const PriceTable = () => {
     }
 
     return (
-        <TableContainer padding={10} borderWidth={4} borderRadius={100} margin={10} scale={0.75}>
+        <TableContainer padding={10} borderWidth={4} borderColor='lightblue' borderRadius={100} marginTop={5} maxW='70%' mx='auto'>
+            <Text textAlign='center' fontSize={30} marginBottom={5}>TODAYS PRICES</Text>
             <Table variant='simple'>
                 <Thead>
                     <Tr>
@@ -37,6 +55,7 @@ const PriceTable = () => {
                         <Th>Market Cap</Th>
                         <Th>Price USD</Th>
                         <Th>% Change</Th>
+                        <Th>Watchlist</Th>
                     </Tr>
                 </Thead>
                 <Tbody>
@@ -54,6 +73,13 @@ const PriceTable = () => {
                                 <Text color={coin.quote.USD.percent_change_24h < 0 ? 'red' : 'green'}>
                                     %{coin.quote.USD.percent_change_24h.toFixed(3)}
                                 </Text>
+                            </Td>
+                            <Td>
+                            {watchlisted.has(coin.id.toString()) ? (
+                                <Icon as={FaStar} onClick={() => handleWatchlist(coin.id.toString())} color='yellow.500'></Icon>
+                                ) : (
+                                <Icon as={FaStar} onClick={() => handleWatchlist(coin.id.toString())}></Icon>
+                                )}
                             </Td>
                         </Tr>
                     ))}
