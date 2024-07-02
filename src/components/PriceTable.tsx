@@ -59,6 +59,7 @@ const PriceTable = () => {
             <Table variant='simple' size='md'>
                 <Thead>
                     <Tr>
+                        <Th>Rank</Th>
                         <Th>Ticker</Th>
                         <Th>Name</Th>
                         <Th>Market Cap</Th>
@@ -70,6 +71,7 @@ const PriceTable = () => {
                 <Tbody>
                     {data?.map((coin) => (
                         <Tr key={coin.id}>
+                            <Td>#{coin.cmc_rank}</Td>
                             <Td>{coin.symbol}</Td>
                             <Td>{coin.name}</Td>
                             <Td>${coin.quote.USD.market_cap.toLocaleString()}</Td>

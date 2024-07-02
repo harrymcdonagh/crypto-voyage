@@ -25,7 +25,7 @@ function App() {
         <GridItem area='nav'>
           <NavBar toggleSidePanel={toggleSidePanel} />
         </GridItem>
-        <GridItem area='main'>
+        <GridItem area='main' marginX="5.5rem"> 
           <DailyStats />
           <PriceTable />
         </GridItem>
