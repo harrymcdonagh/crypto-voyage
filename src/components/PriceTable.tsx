@@ -10,6 +10,7 @@ import {
     Spinner,
     Text,
     Icon,
+    Box,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { FaStar } from "react-icons/fa6";
@@ -32,22 +33,30 @@ const PriceTable = () => {
         })
     }
 
-    if (error) return null;
 
     if (isLoading) {
         return (
-            <Spinner
-                thickness='4px'
-                speed='0.65s'
-                size='xl'
-            />
+            <Box
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                height='70vh'
+            >
+                <Spinner 
+                    thickness='4px'
+                    speed='1s'
+                    size='xl'
+                />
+            </Box>
         );
     }
 
     return (
-        <TableContainer padding={10} borderWidth={4} borderColor='lightblue' borderRadius={100} marginTop={5} maxW='70%' mx='auto'>
-            <Text textAlign='center' fontSize={30} marginBottom={5}>TODAYS PRICES</Text>
-            <Table variant='simple'>
+        <TableContainer padding={10} borderWidth={1} borderColor='lightblue' borderRadius={100} marginTop={5} maxW='100%' mx='auto'>
+            <Box textAlign='center'>
+                <Text fontSize={50} as='b' marginBottom={5}>Todays Prices</Text>
+            </Box>
+            <Table variant='simple' size='md'>
                 <Thead>
                     <Tr>
                         <Th>Ticker</Th>
@@ -70,7 +79,7 @@ const PriceTable = () => {
                                     : coin.quote.USD.price.toFixed(5)}
                             </Td>
                             <Td>
-                                <Text color={coin.quote.USD.percent_change_24h < 0 ? 'red' : 'green'}>
+                                <Text color={coin.quote.USD.percent_change_24h < 0 ? 'red' : 'lightgreen'}>
                                     %{coin.quote.USD.percent_change_24h.toFixed(3)}
                                 </Text>
                             </Td>

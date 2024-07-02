@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_KEY = "297e70db-d67c-4f14-810c-b7e7ffcfc899";
+const API_KEY = "a297e70db-d67c-4f14-810c-b7e7ffcfc899";
 
 const axiosInstance = axios.create({
   baseURL: "https://pro-api.coinmarketcap.com",

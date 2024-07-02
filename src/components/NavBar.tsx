@@ -4,9 +4,9 @@ import logo from "../assets/logo.webp";
 
 const NavBar = ({ toggleSidePanel }: { toggleSidePanel: () => void }) => {
   return (
-    <HStack justifyContent="space-between" padding="10px">
+    <HStack justifyContent="space-between" padding="10px" marginBottom={5}>
       <Image src={logo} boxSize="60px" />
-      <Text as="b" fontSize="3xl">CryptoVoyage</Text>
+      <Text as="b" fontFamily = "Montserrat" fontSize="3xl">CryptoVoyage 🚀</Text>
       <Button onClick={toggleSidePanel}>
         <GiHamburgerMenu />
       </Button>
