@@ -34,7 +34,7 @@ const DailyStats = () => {
                     <Td>
                       <Stat size="sm">
                         <StatNumber>
-                          {coin.quote.USD.price >= 1000
+                          ${coin.quote.USD.price >= 1000
                             ? coin.quote.USD.price.toFixed(0)
                             : coin.quote.USD.price.toFixed(5)}
                           <StatHelpText>
@@ -74,7 +74,7 @@ const DailyStats = () => {
                     <Td>
                       <Stat size="sm">
                         <StatNumber>
-                          {coin.quote.USD.price >= 1000
+                          ${coin.quote.USD.price >= 1000
                             ? coin.quote.USD.price.toFixed(0)
                             : coin.quote.USD.price.toFixed(5)}
                           <StatHelpText>
@@ -93,7 +93,7 @@ const DailyStats = () => {
       <GridItem w='100%' h='100%' borderRadius='10px' borderWidth={1} borderColor='lightblue'>
         <TableContainer>
           <Box textAlign='center' margin='0.75rem'>
-            <Text as="b" fontSize={20} >Fear and Greed Index 🤑</Text>
+            <Text as="b" fontSize={20} >Crypto Market Cap🤑</Text>
           </Box>
         </TableContainer>
       </GridItem>

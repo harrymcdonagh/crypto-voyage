@@ -14,6 +14,7 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { FaStar } from "react-icons/fa6";
+import CoinInfo from './CoinInfo';
 
 
 const PriceTable = () => {
@@ -52,28 +53,27 @@ const PriceTable = () => {
     }
 
     return (
-        <TableContainer padding={10} borderWidth={1} borderColor='lightblue' borderRadius={100} marginTop={5} maxW='100%' mx='auto'>
+        <TableContainer padding={5} borderWidth={1} borderColor='lightblue' borderRadius={100} marginTop={10} maxW='80%' mx='auto'>
             <Box textAlign='center'>
                 <Text fontSize={50} as='b' marginBottom={5}>Todays Prices</Text>
             </Box>
-            <Table variant='simple' size='md'>
+            <Table variant='simple' size='sm'>
                 <Thead>
                     <Tr>
                         <Th>Rank</Th>
-                        <Th>Ticker</Th>
                         <Th>Name</Th>
                         <Th>Market Cap</Th>
                         <Th>Price USD</Th>
                         <Th>% Change</Th>
                         <Th>Watchlist</Th>
+                        <Th textAlign='center'>Info</Th>
                     </Tr>
                 </Thead>
                 <Tbody>
                     {data?.map((coin) => (
                         <Tr key={coin.id}>
                             <Td>#{coin.cmc_rank}</Td>
-                            <Td>{coin.symbol}</Td>
-                            <Td>{coin.name}</Td>
+                            <Td>{coin.name} ({coin.symbol})</Td>
                             <Td>${coin.quote.USD.market_cap.toLocaleString()}</Td>
                             <Td>
                                 ${coin.quote.USD.price >= 1000
@@ -85,12 +85,15 @@ const PriceTable = () => {
                                     %{coin.quote.USD.percent_change_24h.toFixed(3)}
                                 </Text>
                             </Td>
-                            <Td>
+                            <Td textAlign='center'>
                             {watchlisted.has(coin.id.toString()) ? (
                                 <Icon as={FaStar} onClick={() => handleWatchlist(coin.id.toString())} color='yellow.500'></Icon>
                                 ) : (
                                 <Icon as={FaStar} onClick={() => handleWatchlist(coin.id.toString())}></Icon>
                                 )}
+                            </Td>
+                            <Td>
+                                <CoinInfo coin = {coin}/>
                             </Td>
                         </Tr>
                     ))}
