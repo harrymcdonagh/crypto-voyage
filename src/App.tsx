@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import { Grid, GridItem } from '@chakra-ui/react';
-import NavBar from './components/NavBar';
-import PriceTable from './components/PriceTable';
-import SidePanel from './components/SidePanel';
-import DailyStats from './components/DailyStats';
+import { useState } from "react";
+import { Grid, GridItem } from "@chakra-ui/react";
+import NavBar from "./components/NavBar";
+import PriceTable from "./components/PriceTable";
+import SidePanel from "./components/SidePanel";
+import DailyStats from "./components/DailyStats";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,13 +19,15 @@ function App() {
           base: `"nav" "main"`,
         }}
         templateColumns={{
-          base: '1fr',
+          base: "1fr",
         }}
+        gap={4}
+        margin={4}
       >
-        <GridItem area='nav'>
+        <GridItem area="nav">
           <NavBar toggleSidePanel={toggleSidePanel} />
         </GridItem>
-        <GridItem area='main'> 
+        <GridItem area="main">
           <DailyStats />
           <PriceTable />
         </GridItem>

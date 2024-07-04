@@ -1,16 +1,38 @@
 import axios from "axios";
 
-const API_KEY = "297e70db-d67c-4f14-810c-b7e7ffcfc899";
+const coinMarketCapAPIKey = "297e70db-d67c-4f14-810c-b7e7ffcfc899";
+const coinAPIKey = "B1B01E56-174E-4475-A280-0B01BC9627F0";
 
-const axiosInstance = axios.create({
+// CoinMarketCap API configuration
+const coinMarketCapAxiosInstance = axios.create({
   baseURL: "https://pro-api.coinmarketcap.com",
 });
 
-axiosInstance.interceptors.request.use(config => {
-  config.url = `${config.url}?CMC_PRO_API_KEY=${API_KEY}`;
-  return config;
-}, error => {
-  return Promise.reject(error);
+coinMarketCapAxiosInstance.interceptors.request.use(
+  (config) => {
+    config.headers["X-CMC_PRO_API_KEY"] = coinMarketCapAPIKey;
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+// CoinAPI.io API configuration
+const coinAPIAxiosInstance = axios.create({
+  baseURL: "https://rest.coinapi.io",
 });
 
-export default axiosInstance;
+coinAPIAxiosInstance.interceptors.request.use(
+  (config) => {
+    // Append API key to the URL
+    config.url += `/apikey-${coinAPIKey}`;
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+// Export the instances
+export { coinMarketCapAxiosInstance, coinAPIAxiosInstance };

@@ -1,37 +1,51 @@
-import { DataResponse } from './useCoins';
-import { AxiosRequestConfig, CanceledError } from "axios";
+import axios, { AxiosRequestConfig, AxiosInstance, AxiosError } from "axios";
 import { useState, useEffect } from "react";
-import apiClient from "../services/api-client";
 
 interface FetchResponse<T> {
   data: T[];
-  status: any;
 }
 
 const useData = <T>(
+  axiosInstance: AxiosInstance,
   endpoint: string,
   requestConfig?: AxiosRequestConfig,
   deps?: any[]
 ) => {
   const [data, setData] = useState<T[]>([]);
-  const [error, setError] = useState("");
-  const [isLoading, setLoading] = useState(false);
+  const [error, setError] = useState<string>("");
+  const [isLoading, setLoading] = useState<boolean>(false);
 
   useEffect(
     () => {
       const controller = new AbortController();
 
-      setLoading(true);
-      apiClient
-        .get<FetchResponse<T>>(endpoint, { signal: controller.signal, ...requestConfig })
-        .then((res) => {
-          setData(res.data.data)
+      const fetchData = async () => {
+        setLoading(true);
+        try {
+          const response = await axiosInstance.get<FetchResponse<T>>(endpoint, {
+            signal: controller.signal,
+            ...requestConfig,
+          });
+          setData(response.data.data);
+        } catch (err) {
+          if (axios.isAxiosError(err)) {
+            const axiosError = err as AxiosError;
+            if (axiosError.response) {
+              setError(`Request failed with status ${axiosError.response.status}`);
+            } else if (axiosError.request) {
+              setError("No response received");
+            } else {
+              setError("Error in request setup");
+            }
+          } else {
+            setError("Unknown error");
+          }
+        } finally {
           setLoading(false);
-        })
-        .catch((err) => {
-          if (err instanceof CanceledError) return;
-          setError(err.message);
-        });
+        }
+      };
+
+      fetchData();
 
       return () => controller.abort();
     },
