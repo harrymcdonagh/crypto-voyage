@@ -13,7 +13,6 @@ interface CoinData {
 }
 
 const useCoinData = (endpoint: string, params: any) => {
-  console.log(useCoinAPIData<CoinData>(coinAPIAxiosInstance, endpoint, { params }));
   return useCoinAPIData<CoinData>(coinAPIAxiosInstance, endpoint, { params });
 };
 

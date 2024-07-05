@@ -21,7 +21,6 @@ const useCoinAPIData = <T>(
             signal: controller.signal,
             ...requestConfig,
           });
-          console.log("API response data:", response.data);
           setData(response.data);
         } finally {
           setLoading(false);
