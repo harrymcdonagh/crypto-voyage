@@ -13,6 +13,7 @@ const useCoinAPIData = <T>(
   useEffect(
     () => {
       const controller = new AbortController();
+      let isMounted = true;
 
       const fetchData = async () => {
         setLoading(true);
@@ -21,15 +22,26 @@ const useCoinAPIData = <T>(
             signal: controller.signal,
             ...requestConfig,
           });
-          setData(response.data);
+          if (isMounted) {
+            setData(response.data);
+          }
+        } catch (error) {
+          if (!axios.isCancel(error)) {
+            console.error("Error fetching data:", error);
+          }
         } finally {
-          setLoading(false);
+          if (isMounted) {
+            setLoading(false);
+          }
         }
       };
 
       fetchData();
 
-      return () => controller.abort();
+      return () => {
+        isMounted = false;
+        controller.abort();
+      };
     },
     deps ? [...deps] : []
   );

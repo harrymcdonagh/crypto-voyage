@@ -1,4 +1,3 @@
-import useCoins from "../hooks/useCoins";
 import {
   Table,
   Thead,
@@ -13,15 +12,21 @@ import {
   Box,
   Button,
   Stack,
+  Collapse,
+  useBreakpointValue,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { Fragment, useState } from "react";
-import { FaStar } from "react-icons/fa6";
-import CoinInfo from "./CoinInfo";
+import { FaStar } from "react-icons/fa";
+import CoinInfoBox from "./CoinInfoBox";
+
+// import useCoins from "../hooks/useCoins";
 
 const PriceTable = () => {
-  const { data, error, isLoading } = useCoins();
+  // const { data, error, isLoading } = useCoins();
   const [watchlisted, setWatchlisted] = useState<Set<string>>(new Set());
   const [expandedCoin, setExpandedCoin] = useState<string | null>(null);
+  const { isOpen, onToggle } = useDisclosure();
 
   const handleWatchlist = (coinId: string) => {
     setWatchlisted((prevWatchlistedCoins) => {
@@ -37,27 +42,57 @@ const PriceTable = () => {
 
   const toggleCoinInfo = (coinId: string) => {
     setExpandedCoin((prevCoinId) => (prevCoinId === coinId ? null : coinId));
+    onToggle(); // Toggle the collapse state
   };
 
-  if (isLoading) {
-    return (
-      <Box display="flex" justifyContent="center" alignItems="center" height="70vh">
-        <Spinner thickness="4px" speed="1s" size="xl" />
-      </Box>
-    );
-  }
+  // Static data for demonstration purposes
+  const data = [
+    {
+      id: "1",
+      cmc_rank: 1,
+      name: "Bitcoin",
+      symbol: "BTC",
+      quote: {
+        USD: {
+          price: 30000.0,
+          percent_change_24h: 2.5,
+        },
+      },
+    },
+    {
+      id: "2",
+      cmc_rank: 2,
+      name: "Ethereum",
+      symbol: "ETH",
+      quote: {
+        USD: {
+          price: 2000.0,
+          percent_change_24h: -1.5,
+        },
+      },
+    },
+    // Add more coins as needed
+  ];
+
+  // if (isLoading) {
+  //   return (
+  //     <Box display="flex" justifyContent="center" alignItems="center" height="70vh">
+  //       <Spinner thickness="4px" speed="1s" size="xl" />
+  //     </Box>
+  //   );
+  // }
 
   return (
     <Stack
       padding={5}
       borderWidth={1}
-      borderColor="lightblue"
+      borderColor="gray.200"
       borderRadius="lg"
-      marginTop={10}
+      marginTop={{ sm: 5, lg: 10 }}
       mx="auto"
     >
       <Box textAlign="center" my="auto">
-        <Text fontSize={50} as="b" marginBottom={5}>
+        <Text fontSize={{ sm: "25px", lg: "27px", xl: "29px" }} as="b" marginBottom={5}>
           Today's Prices
         </Text>
       </Box>
@@ -66,7 +101,6 @@ const PriceTable = () => {
           <Tr>
             <Th>Rank</Th>
             <Th>Name</Th>
-            <Th>Market Cap</Th>
             <Th>Price USD</Th>
             <Th>% Change</Th>
             <Th>Watchlist</Th>
@@ -74,14 +108,13 @@ const PriceTable = () => {
           </Tr>
         </Thead>
         <Tbody>
-          {data?.map((coin) => (
+          {data.map((coin) => (
             <Fragment key={coin.id}>
               <Tr>
                 <Td>#{coin.cmc_rank}</Td>
                 <Td>
                   {coin.symbol === "FET" ? "Fetch AI" : coin.name} ({coin.symbol})
                 </Td>
-                <Td>${coin.quote.USD.market_cap.toLocaleString()}</Td>
                 <Td>
                   $
                   {coin.quote.USD.price >= 1000
@@ -117,20 +150,23 @@ const PriceTable = () => {
                   </Button>
                 </Td>
               </Tr>
-              {expandedCoin === coin.id.toString() && (
-                <Tr>
-                  <Td colSpan={7} padding={0}>
+              <Tr>
+                <Td colSpan={7} padding={0}>
+                  <Collapse
+                    in={expandedCoin === coin.id.toString()}
+                    transition={{ exit: { duration: 0.5 }, enter: { duration: 1 } }}
+                  >
                     <Box
                       padding={4}
                       borderWidth={1}
                       borderColor="gray.200"
                       borderRadius="md"
                     >
-                      <CoinInfo coin={coin} />
+                      <CoinInfoBox coin={coin} />
                     </Box>
-                  </Td>
-                </Tr>
-              )}
+                  </Collapse>
+                </Td>
+              </Tr>
             </Fragment>
           ))}
         </Tbody>

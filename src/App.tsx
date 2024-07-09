@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Grid, GridItem } from "@chakra-ui/react";
+import { Grid, GridItem, Show } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import PriceTable from "./components/PriceTable";
 import SidePanel from "./components/SidePanel";
@@ -17,6 +17,7 @@ function App() {
       <Grid
         templateAreas={{
           base: `"nav" "main"`,
+          lg: `"nav" "main"`,
         }}
         templateColumns={{
           base: "1fr",
@@ -27,8 +28,10 @@ function App() {
         <GridItem area="nav">
           <NavBar toggleSidePanel={toggleSidePanel} />
         </GridItem>
-        <GridItem area="main">
-          <DailyStats />
+        <GridItem mx={{ base: "60px" }} area="main">
+          <Show above="lg">
+            <DailyStats />
+          </Show>
           <PriceTable />
         </GridItem>
         {isOpen && (
