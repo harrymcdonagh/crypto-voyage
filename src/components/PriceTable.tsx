@@ -128,7 +128,7 @@ const PriceTable = () => {
                     %{coin.quote.USD.percent_change_24h.toFixed(3)}
                   </Text>
                 </Td>
-                <Td textAlign="center">
+                <Td>
                   {watchlisted.has(coin.id.toString()) ? (
                     <Icon
                       as={FaStar}

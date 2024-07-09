@@ -100,17 +100,7 @@ const CoinInfo = ({ coin }: Props) => {
           {coinData.name}
         </Text>
       </HStack>
-      <Grid
-        templateAreas={{
-          base: `"description mc"
-                  "pricechange volume"`,
-          md: `"description mc"
-                "pricechange volume"`,
-        }}
-        gap="4"
-        mt="4"
-        width="100%"
-      >
+      <Grid gap="4" mt="4" width="100%">
         <GridItem area="description" colSpan={{ base: 1, md: 1 }}>
           <Box
             p={4}
@@ -128,7 +118,7 @@ const CoinInfo = ({ coin }: Props) => {
             </Text>
             <Text
               fontFamily="monospace"
-              fontSize={{ base: "12px", lg: "15px", xl: "17px" }}
+              fontSize={{ base: "17px", lg: "15px", xl: "17px", "2xl": "20px" }}
               mt={5}
               flex="1"
               lineHeight="1"
@@ -137,29 +127,9 @@ const CoinInfo = ({ coin }: Props) => {
             </Text>
           </Box>
         </GridItem>
-        <GridItem area="mc" colSpan={{ base: 1, md: 1 }}>
-          <Box
-            p={4}
-            borderWidth={1}
-            borderColor="gray.200"
-            borderRadius="lg"
-            minHeight={{ base: "160px", md: "180px" }}
-            textAlign="center"
-            display="flex"
-            flexDirection="column"
-            justifyContent="center"
-          >
-            <Text fontSize="xl" as="b" mb={1}>
-              Market Cap
-            </Text>
-            <Text mt={2} fontSize="md">
-              ${coinData.quote.USD.market_cap.toLocaleString()}
-            </Text>
-          </Box>
-        </GridItem>
       </Grid>
       <Grid
-        templateColumns="repeat(2, 1fr)"
+        templateColumns="repeat(3, 1fr)"
         gap="4"
         mt="4"
         width="100%"
@@ -229,6 +199,24 @@ const CoinInfo = ({ coin }: Props) => {
           </Text>
           <Text mt={2} fontSize="md">
             Content for the box
+          </Text>
+        </Box>
+        <Box
+          p={4}
+          borderWidth={1}
+          borderColor="gray.200"
+          borderRadius="lg"
+          minHeight={{ base: "100px", md: "120px" }}
+          textAlign="center"
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+        >
+          <Text fontSize="xl" as="b" mb={1}>
+            Market Cap
+          </Text>
+          <Text mt={2} fontSize="md">
+            ${coinData.quote.USD.market_cap.toLocaleString()}
           </Text>
         </Box>
       </Grid>
