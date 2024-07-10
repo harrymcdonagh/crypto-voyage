@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const coinMarketCapAPIKey = "297e70db-d67c-4f14-810c-b7e7ffcfc899";
-const coinAPIKey = "B1B01E56-174E-4475-A280-0B01BC9627F0";
+const coinAPIKey = "c14d194b-be18-4ed0-b854-4800d0b0d32f";
 
 // CoinMarketCap API configuration
 const coinMarketCapAxiosInstance = axios.create({

@@ -11,6 +11,8 @@ import {
   TooltipItem,
 } from "chart.js";
 import zoomPlugin from "chartjs-plugin-zoom";
+import useCoinData from "../hooks/useCoinData";
+import { Coin } from "../hooks/useCoins";
 
 Chart.register(
   CategoryScale,
@@ -39,35 +41,7 @@ const getCurrentDate = () => {
   return currentDate.toISOString();
 };
 
-// Mock data for testing
-const mockData = [
-  {
-    time_close: "2024-01-01T00:00:00Z",
-    rate_open: 45000,
-    rate_close: 46000,
-    rate_high: 47000,
-    rate_low: 44000,
-  },
-  {
-    time_close: "2024-02-01T00:00:00Z",
-    rate_open: 46000,
-    rate_close: 47000,
-    rate_high: 48000,
-    rate_low: 45000,
-  },
-  {
-    time_close: "2024-03-01T00:00:00Z",
-    rate_open: 47000,
-    rate_close: 48000,
-    rate_high: 49000,
-    rate_low: 46000,
-  },
-  // Add more mock data points as needed
-];
-
 const CoinGraph = ({ height, coin }: Props) => {
-  // Comment out the API call and use mock data
-  /*
   const { data, isLoading } = useCoinData(`/v1/exchangerate/${coin.symbol}/USD/history`, {
     period_id: "1DAY",
     time_start: getStartOfYear(),
@@ -82,9 +56,6 @@ const CoinGraph = ({ height, coin }: Props) => {
       </Box>
     );
   }
-  */
-
-  const data = mockData;
 
   const labels = data.map((item) => new Date(item.time_close).toLocaleDateString());
   const openRates = data.map((item) => item.rate_open);
@@ -104,7 +75,8 @@ const CoinGraph = ({ height, coin }: Props) => {
         pointBorderColor: "rgb(75, 192, 192)",
         pointBackgroundColor: "rgb(255, 255, 255)",
         pointBorderWidth: 0,
-        pointRadius: 0,
+        pointRadius: 0, // Points are not visible by default
+        hoverRadius: 5, // Points become visible and larger on hover
         tension: 0.4,
       },
     ],
@@ -127,7 +99,7 @@ const CoinGraph = ({ height, coin }: Props) => {
       zoom: {
         pan: {
           enabled: true,
-          mode: "xy",
+          mode: "xy", // Enable panning on both x and y axes
         },
         zoom: {
           wheel: {
@@ -136,11 +108,13 @@ const CoinGraph = ({ height, coin }: Props) => {
           pinch: {
             enabled: true,
           },
-          mode: "xy",
+          mode: "xy", // Enable zooming on both x and y axes
         },
       },
       tooltip: {
         enabled: true,
+        mode: "nearest", // Use the nearest mode for crosshair effect
+        intersect: false, // Ensure the tooltip shows even when not intersecting with a data point
         callbacks: {
           title: (tooltipItems: TooltipItem<"line">[]) => {
             return tooltipItems[0].label || "";
@@ -164,6 +138,10 @@ const CoinGraph = ({ height, coin }: Props) => {
           y: 10,
         },
       },
+    },
+    interaction: {
+      mode: "index", // Shows the tooltip for the closest data point along the x-axis
+      intersect: false, // Tooltip appears even when not directly over a data point
     },
     scales: {
       x: {

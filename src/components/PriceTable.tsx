@@ -20,10 +20,10 @@ import { Fragment, useState } from "react";
 import { FaStar } from "react-icons/fa";
 import CoinInfoBox from "./CoinInfoBox";
 
-// import useCoins from "../hooks/useCoins";
+import useCoins from "../hooks/useCoins";
 
 const PriceTable = () => {
-  // const { data, error, isLoading } = useCoins();
+  const { data, error, isLoading } = useCoins();
   const [watchlisted, setWatchlisted] = useState<Set<string>>(new Set());
   const [expandedCoin, setExpandedCoin] = useState<string | null>(null);
   const { isOpen, onToggle } = useDisclosure();
@@ -42,45 +42,16 @@ const PriceTable = () => {
 
   const toggleCoinInfo = (coinId: string) => {
     setExpandedCoin((prevCoinId) => (prevCoinId === coinId ? null : coinId));
-    onToggle(); // Toggle the collapse state
+    onToggle();
   };
 
-  // Static data for demonstration purposes
-  const data = [
-    {
-      id: "1",
-      cmc_rank: 1,
-      name: "Bitcoin",
-      symbol: "BTC",
-      quote: {
-        USD: {
-          price: 30000.0,
-          percent_change_24h: 2.5,
-        },
-      },
-    },
-    {
-      id: "2",
-      cmc_rank: 2,
-      name: "Ethereum",
-      symbol: "ETH",
-      quote: {
-        USD: {
-          price: 2000.0,
-          percent_change_24h: -1.5,
-        },
-      },
-    },
-    // Add more coins as needed
-  ];
-
-  // if (isLoading) {
-  //   return (
-  //     <Box display="flex" justifyContent="center" alignItems="center" height="70vh">
-  //       <Spinner thickness="4px" speed="1s" size="xl" />
-  //     </Box>
-  //   );
-  // }
+  if (isLoading) {
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center" height="70vh">
+        <Spinner thickness="4px" speed="1s" size="xl" />
+      </Box>
+    );
+  }
 
   return (
     <Stack
@@ -150,12 +121,9 @@ const PriceTable = () => {
                   </Button>
                 </Td>
               </Tr>
-              <Tr>
-                <Td colSpan={7} padding={0}>
-                  <Collapse
-                    in={expandedCoin === coin.id.toString()}
-                    transition={{ exit: { duration: 0.5 }, enter: { duration: 1 } }}
-                  >
+              {expandedCoin === coin.id.toString() && (
+                <Tr>
+                  <Td colSpan={7} padding={0}>
                     <Box
                       padding={4}
                       borderWidth={1}
@@ -164,9 +132,9 @@ const PriceTable = () => {
                     >
                       <CoinInfoBox coin={coin} />
                     </Box>
-                  </Collapse>
-                </Td>
-              </Tr>
+                  </Td>
+                </Tr>
+              )}
             </Fragment>
           ))}
         </Tbody>

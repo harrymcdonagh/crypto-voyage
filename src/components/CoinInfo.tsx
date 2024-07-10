@@ -1,55 +1,40 @@
 import React from "react";
+import { Coin } from "../hooks/useCoins";
 import {
   Box,
   Link,
+  Spinner,
   Text,
   Image,
   HStack,
   Grid,
   GridItem,
-  StatHelpText,
+  Stat,
   StatArrow,
   StatNumber,
-  Stat,
 } from "@chakra-ui/react";
-import { Coin } from "../hooks/useCoins";
-// import useCoinMetadata from "../hooks/useCoinAPIData";
-// import { coinMarketCapAxiosInstance } from "../services/api-client";
+import useCoinMetadata from "../hooks/useCoinAPIData";
+import { coinMarketCapAxiosInstance } from "../services/api-client";
 
 interface Props {
   coin: Coin;
 }
 
 const CoinInfo = ({ coin }: Props) => {
-  // const { data, isLoading } = useCoinMetadata(
-  //   coinMarketCapAxiosInstance,
-  //   `/v2/cryptocurrency/info?id=${coin.id}`
-  // );
+  const { data, isLoading } = useCoinMetadata(
+    coinMarketCapAxiosInstance,
+    `/v2/cryptocurrency/info?id=${coin.id}`
+  );
 
-  // Static data for demonstration purposes
-  const coinData = {
-    logo: "https://example.com/logo.png",
-    name: "Example Coin",
-    description:
-      "Bitcoin (BTC) is a cryptocurrency launched in 2010. Users are able to generate BTC through the process of mining. Bitcoin has a current supply of 19,719,725. The last known price of Bitcoin is 57,483.67944392 USD and is up 3.09 over the last 24 hours. It is currently trading on 11595 active market(s) with $28,440,758,295.02 traded over the last 24 hours. More information can be found at https://bitcoin.org/.",
-    urls: {
-      website: ["https://example.com"],
-      explorer: ["https://explorer.example.com"],
-      message_board: ["https://messageboard.example.com"],
-      technical_doc: ["https://docs.example.com"],
-      source_code: ["https://github.com/example"],
-      reddit: ["https://reddit.com/r/example"],
-    },
-    quote: {
-      USD: {
-        price: 30000.0,
-        market_cap: 1234567890,
-        percent_change_1h: -0.5,
-        percent_change_24h: 2.5,
-        percent_change_7d: 5.1,
-      },
-    },
-  };
+  const coinData = data && data.data ? data.data[coin.id] : null;
+
+  if (isLoading || !coinData) {
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center" height="70vh">
+        <Spinner thickness="4px" speed="1s" size="xl" />
+      </Box>
+    );
+  }
 
   const renderIconsForUrls = () => {
     const urls = coinData.urls;
@@ -146,41 +131,35 @@ const CoinInfo = ({ coin }: Props) => {
           flexDirection="column"
           justifyContent="center"
         >
-          <Text fontSize="xl" as="b" mb={1}>
+          <Text fontSize="lg" as="b" mb={1}>
             % Price Changes
           </Text>
           <Stat size="sm">
-            <StatNumber>
-              1hr:
-              {coinData.quote.USD.percent_change_1h < 0 ? (
-                <StatArrow type="decrease" />
-              ) : (
-                <StatArrow type="increase" />
-              )}
-              %{coinData.quote.USD.percent_change_1h.toFixed(3)}
-            </StatNumber>
+            1hr:
+            {coin.quote.USD.percent_change_1h < 0 ? (
+              <StatArrow type="decrease" />
+            ) : (
+              <StatArrow type="increase" />
+            )}
+            %{coin.quote.USD.percent_change_1h.toFixed(3)}
           </Stat>
           <Stat size="sm">
-            <StatNumber>
-              24hr:
-              {coinData.quote.USD.percent_change_24h < 0 ? (
-                <StatArrow type="decrease" />
-              ) : (
-                <StatArrow type="increase" />
-              )}
-              %{coinData.quote.USD.percent_change_24h.toFixed(3)}
-            </StatNumber>
+            24hr:
+            {coin.quote.USD.percent_change_24h < 0 ? (
+              <StatArrow type="decrease" />
+            ) : (
+              <StatArrow type="increase" />
+            )}
+            %{coin.quote.USD.percent_change_24h.toFixed(3)}
           </Stat>
           <Stat size="sm">
-            <StatNumber>
-              7d:
-              {coinData.quote.USD.percent_change_7d < 0 ? (
-                <StatArrow type="decrease" />
-              ) : (
-                <StatArrow type="increase" />
-              )}
-              %{coinData.quote.USD.percent_change_7d.toFixed(3)}
-            </StatNumber>
+            7d:
+            {coin.quote.USD.percent_change_7d < 0 ? (
+              <StatArrow type="decrease" />
+            ) : (
+              <StatArrow type="increase" />
+            )}
+            %{coin.quote.USD.percent_change_7d.toFixed(3)}
           </Stat>
         </Box>
         <Box
@@ -198,7 +177,7 @@ const CoinInfo = ({ coin }: Props) => {
             Volume
           </Text>
           <Text mt={2} fontSize="md">
-            Content for the box
+            ${coin.quote.USD.volume_24h.toLocaleString()}
           </Text>
         </Box>
         <Box
@@ -216,7 +195,7 @@ const CoinInfo = ({ coin }: Props) => {
             Market Cap
           </Text>
           <Text mt={2} fontSize="md">
-            ${coinData.quote.USD.market_cap.toLocaleString()}
+            ${coin.quote.USD.market_cap.toLocaleString()}
           </Text>
         </Box>
       </Grid>

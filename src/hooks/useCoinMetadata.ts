@@ -25,7 +25,7 @@ interface CoinMetadataResponse {
   };
 }
 
-const useCoinMetadata = (endpoint: string, params: any) => {
+const useCoinMetadata = (endpoint: string, params?: any) => {
   return useData<CoinMetadataResponse>(coinMarketCapAxiosInstance, endpoint, { params });
 };
 
