@@ -15,18 +15,10 @@ import {
   StatNumber,
   Box,
   useBreakpointValue,
-  Spinner,
 } from "@chakra-ui/react";
-import useCoins from "../hooks/useCoins";
 
-const DailyStats = () => {
-  const { data, isLoading } = useCoins();
-
+const DailyStats = ({ data, watchlisted }: { data: any[]; watchlisted: Set<string> }) => {
   const itemsToShow = useBreakpointValue({ base: 3, sm: 3, md: 3, lg: 5 });
-
-  if (isLoading) {
-    return <Spinner />;
-  }
 
   return (
     <Grid templateColumns="repeat(3, 1fr)" gap={6}>
@@ -168,10 +160,10 @@ const DailyStats = () => {
                     (a, b) =>
                       a.quote.USD.percent_change_24h - b.quote.USD.percent_change_24h
                   )
-                  .slice(0, itemsToShow)
+                  .filter((coin) => watchlisted.has(coin.id.toString()))
                   .map((coin, index) => (
                     <Tr key={coin.id}>
-                      <Td>#{index + 1}</Td>
+                      <Td>#{coin.cmc_rank}</Td>
                       <Td>{coin.symbol}</Td>
                       <Td>
                         <Stat size="sm">
