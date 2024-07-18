@@ -15,77 +15,18 @@ import {
   StatNumber,
   Box,
   useBreakpointValue,
+  Spinner,
 } from "@chakra-ui/react";
-// import useCoins from "../hooks/useCoins";
+import useCoins from "../hooks/useCoins";
 
 const DailyStats = () => {
-  // const { data, error, isLoading } = useCoins();
+  const { data, isLoading } = useCoins();
 
   const itemsToShow = useBreakpointValue({ base: 3, sm: 3, md: 3, lg: 5 });
 
-  // Static data for demonstration purposes
-  const data = [
-    {
-      id: "1",
-      symbol: "BTC",
-      quote: {
-        USD: {
-          price: 30000.0,
-          percent_change_24h: 2.5,
-        },
-      },
-    },
-    {
-      id: "2",
-      symbol: "ETH",
-      quote: {
-        USD: {
-          price: 2000.0,
-          percent_change_24h: -1.5,
-        },
-      },
-    },
-    {
-      id: "3",
-      symbol: "ADA",
-      quote: {
-        USD: {
-          price: 1.2,
-          percent_change_24h: 5.1,
-        },
-      },
-    },
-    {
-      id: "4",
-      symbol: "DOGE",
-      quote: {
-        USD: {
-          price: 0.07,
-          percent_change_24h: -3.2,
-        },
-      },
-    },
-    {
-      id: "5",
-      symbol: "XRP",
-      quote: {
-        USD: {
-          price: 0.5,
-          percent_change_24h: 0.8,
-        },
-      },
-    },
-    {
-      id: "6",
-      symbol: "SOL",
-      quote: {
-        USD: {
-          price: 35.0,
-          percent_change_24h: -0.5,
-        },
-      },
-    },
-  ];
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <Grid templateColumns="repeat(3, 1fr)" gap={6}>
