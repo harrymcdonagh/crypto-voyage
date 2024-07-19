@@ -5,3 +5,7 @@
 - Displays Top Gainers and Top Losers
 - Able to login and add and view your watchlist
 - Add your investments to the portfolio manager in order to track them
+
+# Demo
+
+![Crypto Voyage Demo](./assets/cryptovoyage-preview.gif)
