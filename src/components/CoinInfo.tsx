@@ -24,6 +24,7 @@ const CoinInfo = ({ coin }: Props) => {
     `/v2/cryptocurrency/info?id=${coin.id}`
   );
 
+  //@ts-ignore
   const coinData = data && data.data ? data.data[coin.id] : null;
 
   if (isLoading || !coinData) {
