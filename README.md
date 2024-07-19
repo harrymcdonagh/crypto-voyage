@@ -11,6 +11,7 @@ Crypto Voyage is a web-based React application designed to help users navigate a
 
 ## Upcoming Features
 
+- **Phone/ Tablet Views**: Able to Login and view your watchlist and portfolio!
 - **Account System**: Able to Login and view your watchlist and portfolio!
 - **Porfolio Tracker**: Add your investments and generate statistics tailored to your portfolio including: A chart tracking your portfolios worth over time, and a overall % price change.
 
