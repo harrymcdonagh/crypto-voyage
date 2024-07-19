@@ -2,6 +2,8 @@ import { Text, Box, Spinner } from "@chakra-ui/react";
 import { Line } from "react-chartjs-2";
 import {
   Chart,
+  ChartOptions,
+  InteractionMode,
   CategoryScale,
   LinearScale,
   LineElement,
@@ -75,14 +77,14 @@ const CoinGraph = ({ height, coin }: Props) => {
         pointBorderColor: "rgb(75, 192, 192)",
         pointBackgroundColor: "rgb(255, 255, 255)",
         pointBorderWidth: 0,
-        pointRadius: 0, // Points are not visible by default
-        hoverRadius: 5, // Points become visible and larger on hover
+        pointRadius: 0,
+        hoverRadius: 5,
         tension: 0.4,
       },
     ],
   };
 
-  const options = {
+  const options: ChartOptions<"line"> = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
@@ -99,7 +101,7 @@ const CoinGraph = ({ height, coin }: Props) => {
       zoom: {
         pan: {
           enabled: true,
-          mode: "xy", // Enable panning on both x and y axes
+          mode: "xy",
         },
         zoom: {
           wheel: {
@@ -108,13 +110,13 @@ const CoinGraph = ({ height, coin }: Props) => {
           pinch: {
             enabled: true,
           },
-          mode: "xy", // Enable zooming on both x and y axes
+          mode: "xy",
         },
       },
       tooltip: {
         enabled: true,
-        mode: "nearest", // Use the nearest mode for crosshair effect
-        intersect: false, // Ensure the tooltip shows even when not intersecting with a data point
+        mode: "nearest" as InteractionMode,
+        intersect: false,
         callbacks: {
           title: (tooltipItems: TooltipItem<"line">[]) => {
             return tooltipItems[0].label || "";
@@ -140,8 +142,8 @@ const CoinGraph = ({ height, coin }: Props) => {
       },
     },
     interaction: {
-      mode: "index", // Shows the tooltip for the closest data point along the x-axis
-      intersect: false, // Tooltip appears even when not directly over a data point
+      mode: "index" as InteractionMode,
+      intersect: false,
     },
     scales: {
       x: {

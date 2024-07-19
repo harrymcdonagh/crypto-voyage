@@ -163,7 +163,7 @@ const DailyStats = ({ data, watchlisted }: { data: any[]; watchlisted: Set<strin
                   .filter((coin) => watchlisted.has(coin.id.toString()))
                   .map((coin, index) => (
                     <Tr key={coin.id}>
-                      <Td>#{coin.cmc_rank}</Td>
+                      <Td>#{index + 1}</Td>
                       <Td>{coin.symbol}</Td>
                       <Td>
                         <Stat size="sm">
