@@ -1,4 +1,3 @@
-import React from "react";
 import { Coin } from "../hooks/useCoins";
 import {
   Box,
@@ -11,7 +10,6 @@ import {
   GridItem,
   Stat,
   StatArrow,
-  StatNumber,
 } from "@chakra-ui/react";
 import useCoinMetadata from "../hooks/useCoinAPIData";
 import { coinMarketCapAxiosInstance } from "../services/api-client";

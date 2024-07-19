@@ -1,7 +1,4 @@
-import { Box, Grid, GridItem, Text, useBreakpointValue } from "@chakra-ui/react";
-import useCoinbaseData from "../hooks/useCoinData";
-import { useEffect, useRef } from "react";
-import Chart from "chart.js/auto";
+import { Box, Grid, GridItem, useBreakpointValue } from "@chakra-ui/react";
 import { Coin } from "../hooks/useCoins";
 import CoinGraph from "./CoinGraph";
 import CoinInfo from "./CoinInfo";

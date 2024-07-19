@@ -9,7 +9,7 @@ import useCoins from "./hooks/useCoins";
 function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [watchlisted, setWatchlisted] = useState<Set<string>>(new Set());
-  const { data, error, isLoading } = useCoins();
+  const { data, isLoading } = useCoins();
 
   const toggleSidePanel = () => {
     setIsOpen(!isOpen);

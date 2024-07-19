@@ -26,7 +26,7 @@ const PriceTable = ({
   handleWatchlist: (id: string) => void;
 }) => {
   const [expandedCoin, setExpandedCoin] = useState<string | null>(null);
-  const { isOpen, onToggle } = useDisclosure();
+  const { onToggle } = useDisclosure();
 
   const toggleCoinInfo = (coinId: string) => {
     setExpandedCoin((prevCoinId) => (prevCoinId === coinId ? null : coinId));

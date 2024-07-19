@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, AxiosInstance, AxiosError } from "axios";
+import axios, { AxiosRequestConfig, AxiosInstance } from "axios";
 import { useState, useEffect } from "react";
 
 const useCoinAPIData = <T>(
