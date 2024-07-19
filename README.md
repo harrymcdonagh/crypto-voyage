@@ -16,7 +16,7 @@ Crypto Voyage is a web-based React application designed to help users navigate a
 
 ## Demo
 
-![Crypto Voyage Demo](./assets/crypto_voyage_demo.gif)
+![Crypto Voyage Demo](./assets/cryptovoyage-preview.gif)
 
 ## Upcoming bug fixes
 
