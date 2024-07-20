@@ -36,36 +36,49 @@ function App() {
   }
 
   return (
-    <Grid
-      templateAreas={{
-        base: `"nav" "main"`,
-        lg: `"nav" "main"`,
+    <Box
+      transform={{
+        base: "scale(0.95)",
+        md: "scale(0.95)",
+        lg: "scale(1)",
       }}
-      templateColumns={{
-        base: "1fr",
-      }}
-      gap={4}
-      margin={4}
+      transformOrigin="top left"
+      width="100vw"
+      overflowX="hidden"
     >
-      <GridItem area="nav">
-        <NavBar toggleSidePanel={toggleSidePanel} />
-      </GridItem>
-      <GridItem mx={{ base: "60px" }} area="main">
-        <Show above="lg">
-          <DailyStats data={data} watchlisted={watchlisted} />
-        </Show>
-        <PriceTable
-          data={data}
-          watchlisted={watchlisted}
-          handleWatchlist={handleWatchlist}
-        />
-      </GridItem>
-      {isOpen && (
-        <GridItem>
-          <SidePanel isOpen={isOpen} toggleSidePanel={toggleSidePanel} />
+      <Grid
+        templateAreas={{
+          base: `"nav" "main"`,
+          lg: `"nav nav 
+                main main"`,
+        }}
+        templateColumns={{
+          base: "1fr",
+          lg: "200px 1fr",
+        }}
+        gap={4}
+        margin={4}
+      >
+        <GridItem area="nav">
+          <NavBar toggleSidePanel={toggleSidePanel} />
         </GridItem>
-      )}
-    </Grid>
+        <GridItem mx={{ base: "0", lg: "60px" }} area="main">
+          <Show above="lg">
+            <DailyStats data={data} watchlisted={watchlisted} />
+          </Show>
+          <PriceTable
+            data={data}
+            watchlisted={watchlisted}
+            handleWatchlist={handleWatchlist}
+          />
+        </GridItem>
+        {isOpen && (
+          <GridItem>
+            <SidePanel isOpen={isOpen} toggleSidePanel={toggleSidePanel} />
+          </GridItem>
+        )}
+      </Grid>
+    </Box>
   );
 }
 
