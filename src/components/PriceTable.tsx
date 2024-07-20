@@ -35,15 +35,15 @@ const PriceTable = ({
 
   return (
     <Stack
-      padding={5}
+      padding={3}
       borderWidth={1}
       borderColor="gray.200"
-      borderRadius="lg"
-      marginTop={{ sm: 5, lg: 10 }}
+      borderRadius="md"
+      marginTop={{ sm: 3, lg: 5 }}
       mx="auto"
     >
       <Box textAlign="center" my="auto">
-        <Text fontSize={{ sm: "25px", lg: "27px", xl: "29px" }} as="b" marginBottom={5}>
+        <Text fontSize={{ sm: "20px", lg: "22px", xl: "24px" }} as="b" marginBottom={3}>
           Today's Prices
         </Text>
       </Box>
@@ -105,9 +105,9 @@ const PriceTable = ({
                 </Tr>
                 {expandedCoin === coin.id.toString() && (
                   <Tr>
-                    <Td colSpan={7} padding={0}>
+                    <Td colSpan={6} padding={0}>
                       <Box
-                        padding={4}
+                        padding={2}
                         borderWidth={1}
                         borderColor="gray.200"
                         borderRadius="md"
