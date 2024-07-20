@@ -10,15 +10,15 @@ interface Props {
 const CoinInfoBox = ({ coin }: Props) => {
   const graphWidth = useBreakpointValue({
     base: "100%",
-    sm: "20%",
-    md: "30%",
+    sm: "40%",
+    md: "40%",
     lg: "40%",
     xl: "40%",
   });
   const infoWidth = useBreakpointValue({
     base: "100%",
-    sm: "40%",
-    md: "50%",
+    sm: "60%",
+    md: "60%",
     lg: "60%",
     xl: "60%",
   });
