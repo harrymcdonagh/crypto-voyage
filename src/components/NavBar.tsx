@@ -6,10 +6,15 @@ const NavBar = ({ toggleSidePanel }: { toggleSidePanel: () => void }) => {
   return (
     <HStack justifyContent="space-between" padding="10px" marginBottom={2}>
       <Image src={logo} boxSize="60px" />
-      <Text as="b" fontFamily="Montserrat" fontSize="3xl">
+      <Text
+        as="b"
+        fontFamily="Montserrat"
+        fontSize={["lg", "2xl", "3xl", "4xl"]}
+        textAlign="center"
+      >
         CryptoVoyage 🚀
       </Text>
-      <Button onClick={toggleSidePanel}>
+      <Button onClick={toggleSidePanel} display={["block"]}>
         <GiHamburgerMenu />
       </Button>
     </HStack>

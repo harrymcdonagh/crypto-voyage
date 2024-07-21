@@ -170,7 +170,8 @@ const CoinGraph = ({ height, coin }: Props) => {
       height={height}
       p={3}
       paddingBottom={14}
-      mx={3}
+      my={4}
+      mx={4}
       borderWidth={1}
       borderColor="gray.200"
       borderRadius="lg"

@@ -45,12 +45,12 @@ function App() {
         base: "1fr",
       }}
       gap={4}
-      margin={4}
+      mx={{ base: "10px", lg: "100px", xl: "180px", "2xl": "300px" }}
     >
       <GridItem area="nav">
         <NavBar toggleSidePanel={toggleSidePanel} />
       </GridItem>
-      <GridItem mx={{ base: "60px" }} area="main">
+      <GridItem area="main">
         <Show above="lg">
           <DailyStats data={data} watchlisted={watchlisted} />
         </Show>

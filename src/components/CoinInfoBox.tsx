@@ -8,29 +8,31 @@ interface Props {
 }
 
 const CoinInfoBox = ({ coin }: Props) => {
-  const graphWidth = useBreakpointValue({
-    base: "100%",
-    sm: "40%",
-    md: "40%",
-    lg: "40%",
-    xl: "40%",
-  });
-  const infoWidth = useBreakpointValue({
-    base: "100%",
-    sm: "60%",
-    md: "60%",
-    lg: "60%",
-    xl: "60%",
-  });
+  // Dynamic height value for the CoinGraph component
   const graphHeight = useBreakpointValue({
     base: "300px",
+    sm: "300px",
     md: "300px",
     lg: "500px",
     xl: "500px",
   });
 
+  // Dynamic column layout for responsive design
+  const columns = useBreakpointValue({
+    base: "1fr",
+    sm: "1fr",
+    md: "1fr",
+    lg: "2fr 310px",
+    xl: "2fr 400px",
+    "2xl": "2fr 600px",
+  });
+
   return (
-    <Box>
+    <Box
+      maxW="container.lg" // Limits the width to the container size
+      mx="auto"
+      p={4} // Adds padding for better spacing
+    >
       <Grid
         templateAreas={{
           base: `"info" "graph"`,
@@ -39,20 +41,13 @@ const CoinInfoBox = ({ coin }: Props) => {
           lg: `"info graph"`,
           xl: `"info graph"`,
         }}
-        templateColumns={{
-          base: "1fr",
-          sm: "1fr",
-          md: "1fr",
-          lg: `${infoWidth} ${graphWidth}`,
-          xl: `${infoWidth} ${graphWidth}`,
-        }}
-        gap="1"
-        h="auto"
+        templateColumns={columns} // Use the dynamic column widths
+        gap={4}
       >
-        <GridItem pl="2" area="info">
+        <GridItem area="info">
           <CoinInfo coin={coin} />
         </GridItem>
-        <GridItem pl="2" area="graph">
+        <GridItem area="graph">
           <CoinGraph height={graphHeight} coin={coin} />
         </GridItem>
       </Grid>
