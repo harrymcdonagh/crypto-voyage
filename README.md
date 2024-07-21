@@ -1,6 +1,6 @@
 # Crypto Voyage
 
-Crypto Voyage is a web-based React application designed to help users navigate and analyze the top cryptocurrencies. It allows users to track historical coin prices, view top gainers and losers, manage their watchlist and find important information about specific coi.
+Crypto Voyage is a web-based React application designed to help users navigate and analyze the top cryptocurrencies. It allows users to track historical coin prices, view top gainers and losers, manage their watchlist and find important information about specific coins.
 
 ## Features
 
