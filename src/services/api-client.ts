@@ -5,7 +5,7 @@ const coinAPIKey = "B1B01E56-174E-4475-A280-0B01BC9627F0";
 
 // CoinMarketCap API configuration
 const coinMarketCapAxiosInstance = axios.create({
-  baseURL: "https://pro-api.coinmarketcap.com",
+  baseURL: "/api",
 });
 
 coinMarketCapAxiosInstance.interceptors.request.use(

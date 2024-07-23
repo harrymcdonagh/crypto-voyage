@@ -24,7 +24,7 @@ const CoinInfoBox = ({ coin }: Props) => {
     md: "1fr",
     lg: "2fr 310px",
     xl: "2fr 400px",
-    "2xl": "2fr 600px",
+    "2xl": "2fr 500px",
   });
 
   return (

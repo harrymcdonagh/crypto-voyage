@@ -52,7 +52,7 @@ export interface DataResponse {
 }
 
 const useCoins = () => {
-  return useData<Coin>(coinMarketCapAxiosInstance, "/v1/cryptocurrency/listings/latest");
+  return useData<Coin>(coinMarketCapAxiosInstance, "v1/cryptocurrency/listings/latest");
 };
 
 export default useCoins;
