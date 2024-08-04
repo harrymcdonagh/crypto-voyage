@@ -19,10 +19,6 @@ Crypto Voyage is a web-based React application designed to help users navigate a
 
 ![Crypto Voyage Demo](./assets/cryptovoyage-preview.gif)
 
-## Upcoming bug fixes
-
-- **CORS**: App does not work when CORS is enabled, To see app in current state please install the following extension and enable: https://chromewebstore.google.com/detail/cors-unblock/lfhmikememgdcahcdlaciloancbhjino
-
 ## Installation
 
 To get started with Crypto Voyage, follow these steps:
