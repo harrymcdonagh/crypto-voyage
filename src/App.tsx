@@ -2,18 +2,12 @@ import { useState } from "react";
 import { Grid, GridItem, Show, Spinner, Box } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import PriceTable from "./components/PriceTable";
-import SidePanel from "./components/SidePanel";
 import DailyStats from "./components/DailyStats";
 import useCoins from "./hooks/useCoins";
 
 function App() {
-  const [isOpen, setIsOpen] = useState(false);
   const [watchlisted, setWatchlisted] = useState<Set<string>>(new Set());
   const { data, isLoading } = useCoins();
-
-  const toggleSidePanel = () => {
-    setIsOpen(!isOpen);
-  };
 
   const handleWatchlist = (coinId: string) => {
     setWatchlisted((prevWatchlistedCoins) => {
