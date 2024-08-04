@@ -48,7 +48,7 @@ function App() {
       mx={{ base: "10px", lg: "100px", xl: "180px", "2xl": "300px" }}
     >
       <GridItem area="nav">
-        <NavBar toggleSidePanel={toggleSidePanel} />
+        <NavBar />
       </GridItem>
       <GridItem area="main">
         <Show above="lg">
@@ -60,11 +60,6 @@ function App() {
           handleWatchlist={handleWatchlist}
         />
       </GridItem>
-      {isOpen && (
-        <GridItem>
-          <SidePanel isOpen={isOpen} toggleSidePanel={toggleSidePanel} />
-        </GridItem>
-      )}
     </Grid>
   );
 }

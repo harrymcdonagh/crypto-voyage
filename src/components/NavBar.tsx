@@ -1,11 +1,8 @@
-import { Button, HStack, Image, Text } from "@chakra-ui/react";
-import { GiHamburgerMenu } from "react-icons/gi";
-import logo from "../assets/logo.webp";
+import { HStack, Text } from "@chakra-ui/react";
 
-const NavBar = ({ toggleSidePanel }: { toggleSidePanel: () => void }) => {
+const NavBar = () => {
   return (
-    <HStack justifyContent="space-between" padding="10px" marginBottom={2}>
-      <Image src={logo} boxSize="60px" />
+    <HStack justifyContent="center" padding="10px" marginBottom={2}>
       <Text
         as="b"
         fontFamily="Montserrat"
@@ -14,9 +11,6 @@ const NavBar = ({ toggleSidePanel }: { toggleSidePanel: () => void }) => {
       >
         CryptoVoyage 🚀
       </Text>
-      <Button onClick={toggleSidePanel} display={["block"]}>
-        <GiHamburgerMenu />
-      </Button>
     </HStack>
   );
 };
