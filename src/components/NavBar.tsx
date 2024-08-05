@@ -1,8 +1,11 @@
-import { HStack, Text } from "@chakra-ui/react";
+import { HStack, Text, Image } from "@chakra-ui/react";
+import ColorModeSwitch from "./ColorModeSwitch";
+import logo from "../assets/logo.webp";
 
 const NavBar = () => {
   return (
-    <HStack justifyContent="center" padding="10px" marginBottom={2}>
+    <HStack justifyContent="space-between" padding="10px" marginBottom={2}>
+      <Image src={logo} boxSize="60px" />
       <Text
         as="b"
         fontFamily="Montserrat"
@@ -11,6 +14,7 @@ const NavBar = () => {
       >
         CryptoVoyage 🚀
       </Text>
+      <ColorModeSwitch />
     </HStack>
   );
 };
